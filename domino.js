@@ -1,18 +1,18 @@
 
 
-function Box(x, y, w, h){
-    const options = {
+function Domino(x, y, w, h){
+
+    this.body = Bodies.rectangle(x, y, w, h, {
         friction: 0.1,
         restitution: 0.1,
         frictionAir:0
 
-    };
-    this.body = Bodies.rectangle(x, y, w, h, options); // creates rect in physics world matter.js
+    }); // creates rect in physics world matter.js
     this.w = w;
     this.h = h;
 
-    World.add(world, this.body);
-    this.show = function (){
+    World.add(world, this.body); // physics
+    this.draw = function (){
         const pos = this.body.position;
         const angle = this.body.angle;
 

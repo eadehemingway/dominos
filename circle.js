@@ -1,15 +1,14 @@
 
 
 function Circle(x, y, r){
-    const options = {
+    this.body = Bodies.circle(x, y, r, {
         friction: 0.02,
         restitution: 0,
         density: 0.1
-    };
-    this.body = Bodies.circle(x, y, r, options); // creates rect in physics world matter.js
+    }); // creates rect in physics world matter.js
     this.r = r;
 
-    World.add(world, this.body);
+    World.add(world, this.body); // add physics to physics world
 
     this.isOffScreen = function () {
         const pos = this.body.position;
@@ -21,7 +20,7 @@ function Circle(x, y, r){
         World.remove(world, this.body);
 
     };
-    this.show = function (){
+    this.draw = function (){
         const pos = this.body.position;
         const angle = this.body.angle;
 
