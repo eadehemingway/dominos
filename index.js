@@ -1,51 +1,47 @@
+let Engine = Matter.Engine,
+    Render = Matter.Render,
+    World = Matter.World,
+    Bodies = Matter.Bodies;
 
-const Engine = Matter.Engine;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
+let engine = Engine.create();
+engine.gravity.scale = 0.003;
 
+let width = 5000;
+let height = 500;
+let box_width = 5 * 2;
+let box_height = 40 * 2;
+let gap = 40;
 
-let engine;
-let world;
-let dominos = [];
-let ground;
-let slide;
-let ball;
-
-const box_width = 20;
-const box_height = 160;
-function setup(){ // inbuilt to p5
-    createCanvas(1600, 600);
-    engine = Engine.create();
-    // engine.timing.timeScale = 2;
-    world = engine.world;
-    Engine.run(engine); // bit like saying "continually update"
-
-
-    ground = new Boundary(600, height, width, 100);
-    slide = new Boundary(200, height - 200, 300, 30, 60);
-    ball = new Circle(90, height-300, 50);
-    for (var i =0; i < 20; i++){
-        dominos.push(new Domino((75 * i) + 450, height -150, box_width, box_height)); // this Box is an object we have created in box.js
+let render = Render.create({
+    element: document.body,
+    engine: engine,
+    options: {
+        width,
+        height,
+        wireframes: false
     }
+});
 
-    // Matter.Body.applyForce(ball.body, { x: ball.body.position.x, y: ball.body.position.y },  { x: 0, y: 0 });
+let ground = Bodies.rectangle(width / 2, height - 100, width, 100, { isStatic: true });
+let slide = Bodies.rectangle(190, height - 200, 300, 30, { angle: 60, isStatic: true });
 
+let ball = Bodies.circle(100, 30, 20* 2);
+ball.restitution = 0;
+ball.frictionAir = 0.001;
+
+World.add(engine.world, [ground, slide, ball]);
+
+for (let i =0; i < 70; i++){
+    body = Bodies.rectangle((gap * i) + 350, height -150, box_width, box_height, {
+        friction: 0.075,
+        restitution: 0.1,
+        frictionAir: 0,
+        mass: 5,
+    });
+    World.add(engine.world, body); // physics
 }
 
+Engine.run(engine);
 
+Render.run(render);
 
-
-function draw(){ // inbuilt to p5
-    background(51);
-    ground.draw();
-    slide.draw();
-    ball.draw();
-    for (var i =0; i < dominos.length; i++){
-        dominos[i].draw();
-    }
-    fill(120);
-    rectMode(CENTER);
-
-
-
-}
