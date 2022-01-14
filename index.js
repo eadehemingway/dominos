@@ -26,17 +26,24 @@ let render = Render.create({
     },
 });
 
+let render_styles = {
+    fillStyle: "#333",
+    // strokeStyle: "blue",
+    // lineWidth: 3
+};
+
 // level 0
 let level0 = Bodies.rectangle(
     width / 2 - 300,
     height - level0_height,
     width,
     100,
-    { isStatic: true }
+    { isStatic: true, render: render_styles }
 );
 let slide0 = Bodies.rectangle(190, height - level0_height - 100, 300, 30, {
     angle: 60,
     isStatic: true,
+    render: render_styles,
 });
 for (let i = 0; i < 70; i++) {
     body = Bodies.rectangle(
@@ -61,14 +68,14 @@ for (let i = 1; i < 8; i++) {
         height - level0_height + i * level_height,
         width,
         100,
-        { isStatic: true }
+        { isStatic: true, render: render_styles }
     );
     let slide = Bodies.rectangle(
         (i % 2 ? width : 400) - 220,
         height - level0_height + i * level_height - 200,
         300,
         30,
-        { angle: to_rads((i % 2 ? -1 : 1) * 35), isStatic: true }
+        { angle: to_rads((i % 2 ? -1 : 1) * 35), isStatic: true, render: render_styles }
     );
     World.add(engine.world, [level, slide]);
 
