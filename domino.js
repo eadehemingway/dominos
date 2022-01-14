@@ -5,7 +5,8 @@ function Domino(x, y, w, h){
     this.body = Bodies.rectangle(x, y, w, h, {
         friction: 0.1,
         restitution: 0.1,
-        frictionAir:0
+        frictionAir: 0,
+        mass: 5
 
     }); // creates rect in physics world matter.js
     this.w = w;

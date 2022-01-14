@@ -6,7 +6,7 @@ function Boundary(x, y, w, h, a){
         friction: 1,
         restitution: 0.6,
         isStatic: true ,// ie. it doesnt move,
-        angle: a || 0
+        angle: a || 0,
     }); // creates rect in physics world matter.js
     this.w = w;
     this.h = h;

@@ -4,7 +4,7 @@ function Circle(x, y, r){
     this.body = Bodies.circle(x, y, r, {
         friction: 0.02,
         restitution: 0,
-        density: 0.1
+        // density: 0.1
     }); // creates rect in physics world matter.js
     this.r = r;
 
