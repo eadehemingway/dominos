@@ -8,6 +8,7 @@ let engine;
 let world;
 let dominos = [];
 let ground;
+let slide;
 let ball;
 
 const box_width = 10;
@@ -20,7 +21,8 @@ function setup(){ // inbuilt to p5
 
 
     ground = new Boundary(600, height, width, 100);
-    ball = new Circle(90, height-250, 50);
+    slide = new Boundary(200, height - 300, 300, 30, 60);
+    ball = new Circle(90, height-450, 50);
     for (var i =0; i < 20; i++){
         dominos.push(new Domino((55 * i) + 250, height -150, box_width, box_height)); // this Box is an object we have created in box.js
     }
@@ -35,6 +37,7 @@ function setup(){ // inbuilt to p5
 function draw(){ // inbuilt to p5
     background(51);
     ground.draw();
+    slide.draw();
     ball.draw();
     for (var i =0; i < dominos.length; i++){
         dominos[i].draw();
